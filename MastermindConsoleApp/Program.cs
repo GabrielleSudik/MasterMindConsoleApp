@@ -34,6 +34,7 @@ namespace MasterMindConsoleApp
 
             Console.WriteLine("I hope you had fun! Press ENTER to close the game.");
             Console.ReadLine();
+
         }
 
         public static int[] getCompysNumber()
@@ -43,14 +44,16 @@ namespace MasterMindConsoleApp
             for (int i = 0; i < compysNumber.Length; i++)
             {
                 Random rnd = new Random();
-                compysNumber[i] = rnd.Next(1, 7);
+                compysNumber[i] = rnd.Next(1, 7); //this tends to produce four of the same digit
+                    //but not when I'm debugging -- is it too fast, maybe?
             }
 
             //this just confirms the number if you want to test it while playing:
-            Console.WriteLine("To confirm the number during writing the program:");
-            for (int i = 0; i < compysNumber.Length; i++)
-                Console.Write(compysNumber[i]);
-            Console.WriteLine("\n");
+            //keep in for easy troubleshooting
+            //Console.WriteLine("To confirm the number during writing the program:");
+            //for (int i = 0; i < compysNumber.Length; i++)
+            //    Console.Write(compysNumber[i]);
+            //Console.WriteLine("\n");
 
             Console.WriteLine("I am thinking of a 4-digit number; all digits are between 1 and 6.");
             Console.WriteLine("Press ENTER to start your guesses.");
@@ -81,6 +84,7 @@ namespace MasterMindConsoleApp
         public static bool compareBothArrays(int[] playersArray, int[] compysArray)
         {
             bool doArraysMatch = false;
+
             char[] hintsArray = new char[] { '_', '_', '_', '_' }; 
 
             if (playersArray.SequenceEqual(compysArray))
@@ -91,7 +95,7 @@ namespace MasterMindConsoleApp
             }
             else
             {
-                GiveHintWhenArraysDoNotMatch(playersArray, compysArray, hintsArray);
+                GiveHintWhenTwoArraysDoNotMatch(playersArray, compysArray, hintsArray);
             }
 
             Console.WriteLine("Here is your hint for the next try:");
@@ -104,7 +108,7 @@ namespace MasterMindConsoleApp
             return doArraysMatch;
         }
 
-        private static void GiveHintWhenArraysDoNotMatch(int[] playersArray, int[] compysArray, char[] hintsArray)
+        private static void GiveHintWhenTwoArraysDoNotMatch(int[] playersArray, int[] compysArray, char[] hintsArray)
         {
             for (int i = 0; i < playersArray.Length; i++)
             {
@@ -121,24 +125,25 @@ namespace MasterMindConsoleApp
 
         public static void welcomeToTheGame()
         {
-            Console.WriteLine(  "Welcome to my mind-reading game!\n" + 
-                                "I'm going to think of a 4-digit number. "+
-                                "Each digit will be from 1-6 only.\n" +
-                                "I will give you 10 tries to guess the number," +
-                                "giving you hints to help you get it right." +
-                                "Press ENTER to read the rules.\n");
+            Console.WriteLine("Welcome to my mind-reading game!\n");
+            Console.WriteLine("I'm going to think of a 4-digit number. ");
+            Console.WriteLine("Each digit will be from 1-6 only.\n");
+            Console.WriteLine("I will give you 10 tries to guess the number,");
+            Console.WriteLine("giving you hints to help you get it right.");
+            Console.WriteLine("Press ENTER to read the rules.\n");
             Console.ReadLine();
         }
 
         public static void explainTheRules()
         {
-            Console.WriteLine(  "Here's how you play:\n" +
-                                "Type in 4 digits (each one between 1 and 6 only!) and hit enter." +
-                                "If any of your digits match my digits, I'll mark a + in that spot." +
-                                "If any of your digits match any of my digits (but in the wrong spot), I'll mark an - in that spot." +
-                                "And if any of your digits are nowhere in my number, I'll mark those with a blank (_)." +
-                                "I will let you know if you guess my number! You have 10 tries.\n" +
-                                "Press ENTER to start the game.\n");
+            Console.WriteLine("Here's how you play:\n");
+            Console.WriteLine("Type in 4 digits (each one between 1 and 6 only!) and hit enter.");
+            Console.WriteLine("If any of your digits match my digits, I'll mark a + in that spot.");
+            Console.WriteLine("If any of your digits match any of my digits (but in the wrong spot), I'll mark an - in that spot.");
+            Console.WriteLine("And if any of your digits are nowhere in my number, I'll mark those with a blank (_).");
+            Console.WriteLine("I will let you know if you guess my number! You have 10 tries.\n");
+
+            Console.WriteLine("Press ENTER to start the game.\n");
             Console.ReadLine();
         }
     }
